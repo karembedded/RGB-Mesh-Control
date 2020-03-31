@@ -46,7 +46,7 @@ void reStartServer(void);
 void handle_onchange_color(void);
 
 // Send my ID every 10 seconds to inform others
-Task taskSendMessage( TASK_SECOND*10000, TASK_FOREVER, &sendMessage ); // start with a one second interval
+Task taskSendMessage( TASK_SECOND*10, TASK_FOREVER, &sendMessage ); // start with a one second interval
 
 void setup() {
   Serial.begin(115200);
@@ -58,7 +58,7 @@ void setup() {
   Serial.println("HTTP server started");
   delay(100);
   mesh.setDebugMsgTypes( ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE | DEBUG ); // all types on
-  mesh.init( MESH_PREFIX, MESH_PASSWORD, &userScheduler, MESH_PORT, WIFI_AP,6 );
+  mesh.init( MESH_PREFIX, MESH_PASSWORD, &userScheduler, MESH_PORT, WIFI_AP_STA,6 );
   userScheduler.addTask( taskSendMessage );
   taskSendMessage.enable();
   pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
